@@ -4,18 +4,33 @@ import { Card, Button, Icon, Image, Divider } from 'react-native-elements'
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import MapView, { Marker } from 'react-native-maps'
-import axios from 'axios'
 import Loading from '../components/Loading'
-import { quintas } from '../utils/quintasobj'
+//import { quintas } from '../utils/quintasobj'
 
 export default function Feed() {
     
-    //const [quintas, setquintas] = useState({})
+    const [quintas, setquintas] = useState({})
     const [viewquinta, setviewquinta] = useState({ visible: false, quinta: {} })
 
-    // const req = fetch('http://localhost:80/APIQUINTA/api/quintas/list')
-    // .then((response) => response.json())
-    // .catch((e) => console.log( e ))
+    useEffect(() => {
+
+        ( async() => {
+
+            const url = 'https://apiquinta.000webhostapp.com/api/quintas/list'
+            
+            const response = await fetch( url )
+                                    .then(
+                                        response => response.json()
+                                    )
+                                    .then(
+                                        json => console.log( json )
+                                    )
+                                    .catch(
+                                        e => console.log( e )
+                                    ) 
+        })()
+
+    }, [])
 
     return (
         <ScrollView>
@@ -78,13 +93,13 @@ function Map( props ){
                         draggable
                     /> */}
 
-                    {
+                    {/* {
                         quintas.map( (quinta) => 
                             
                             <MapView.Marker 
                                 coordinate={{
-                                    latitude: quinta.lat,
-                                    longitude: quinta.lng
+                                    latitude: parseFloat(quinta.lat),
+                                    longitude: parseFloat(quinta.lng)
                                 }}
                                 draggable
                                 onPress={ () => setviewquinta({ visible: true, quinta }) }
@@ -92,7 +107,7 @@ function Map( props ){
                             />
 
                         )
-                    }
+                    } */}
 
                 </MapView>
                     :
@@ -110,7 +125,7 @@ function Cards() {
         
     //     ( async () => {
             
-    //         await axios.get("http://localhost:4000/api/users")
+    //         await axios.get("https://apiquinta.000webhostapp.com/api/quintas/list")
     //         .then( response => {
     //             const quinta = response.data;
     //             //console.log( quinta )
@@ -122,18 +137,18 @@ function Cards() {
 
     // }, [])
 
+    // // console.log( quintas )
     // console.log( quintas )
-    console.log( quintas )
 
     return (
         <View style={ styles.ContCards }>
 
-            {
+            {/* {
                 quintas.map( (quinta) => 
 
                     // {/*const img_url = `../../assets/img/${ quinta.img }`},
 
-                    <Card containerStyle={ styles.cardStyle } >
+                    <Card containerStyle={ styles.cardStyle } key={ quinta.id } >
                         <Card.Image 
                             source={ {uri: "../../assets/img/" + quinta.img } } 
                             style={ styles.cardImg }
@@ -147,7 +162,7 @@ function Cards() {
                     </Card>
 
                 )
-            }
+            } */}
 
         </View>
     )

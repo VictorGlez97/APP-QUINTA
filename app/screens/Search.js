@@ -82,7 +82,7 @@ export default function Search() {
 
                     // {/*const img_url = `../../assets/img/${ quinta.img }`},
 
-                    <Card containerStyle={ styles.cardStyle } >
+                    <Card containerStyle={ styles.cardStyle } key={ quinta.id } >
                         <Card.Image 
                             source={ {uri: "../../assets/img/" + quinta.img } } 
                             style={ styles.cardImg }
