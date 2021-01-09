@@ -20,6 +20,14 @@ export default function Login() {
 
     }
 
+    const Login = async () => {
+
+        const url = ''
+
+        const verify = await fetch
+
+    }
+
     return (
         <ScrollView
             centerContent={ true }
@@ -45,6 +53,7 @@ export default function Login() {
                 <Button 
                     title='Entrar'
                     style={{ marginBottom: 8 }}
+                    onPress={ () =>  }
                 />
 
                 <Button 

@@ -16,14 +16,17 @@ export default function Feed() {
 
         ( async() => {
 
-            const url = 'https://apiquinta.000webhostapp.com/api/quintas/list'
+            const url = 'https://apiquinta.000webhostapp.com/quintas/list'
             
             const response = await fetch( url )
                                     .then(
                                         response => response.json()
                                     )
                                     .then(
-                                        json => console.log( json )
+                                        (json) => { 
+                                            const { data } = json 
+                                            console.log( data )
+                                        }
                                     )
                                     .catch(
                                         e => console.log( e )

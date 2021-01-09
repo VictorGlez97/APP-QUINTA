@@ -19,22 +19,31 @@ export default function Register() {
 
     const Register = async() => {
 
-        console.log( 'register' )
-        const url = 'https://apiquinta.000webhostapp.com/users/register'
+        if (login.pass === login.pass2 & login.pass != '' & login.pass2 != ''){
 
-        const response = await fetch( url, {
-            method: 'POST',
-            body: login,
-            headers: {
-                "Content-Type": "multipart/form-data; boundary=something"
-            }
-        });
-        // .then( response => response.json() )
-        // .then( json => console.log( json ) )
+            const url = 'https://apiquinta.000webhostapp.com/users/register'
 
-        const jsonResponse = await response.json();
-        console.log( jsonResponse );
+            const newUser = JSON.stringify([{
+                'name': login.name,
+                'lastname': login.lastname,
+                'tel': login.tel,
+                'email': login.email,
+                'pass': login.pass
+            }]);
+            //console.log( newUser );
 
+            const response = await fetch( url, {
+                method: 'POST',
+                body: newUser,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            const jsonResponse = await response.json();
+            console.log( jsonResponse );
+        }
 
     }
 
@@ -70,7 +79,7 @@ export default function Register() {
                 <Input 
                     placeholder='Celular'
                     leftIcon={<Icon type='material-community' name='phone-outline' />}
-                    onChangeText={ ( text ) => HandleInputChange( 'phone', text ) }
+                    onChangeText={ ( text ) => HandleInputChange( 'tel', text ) }
                 />
 
                 <Text style={ styles.Label }> Contraseña </Text>
